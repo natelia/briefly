@@ -1,0 +1,8 @@
+<article class="story">
+  <h3><%= link_to story.title, story.url, target: "_blank", rel: "noopener" %></h3>
+  <p class="story__meta"><%= story.source_name %></p>
+  <p class="story__summary"><%= story.summary %></p>
+  <% if story.stretch? %>
+    <p class="story__why"><strong>Why this matters for you:</strong> <%= story.why_it_matters %></p>
+  <% end %>
+</article>

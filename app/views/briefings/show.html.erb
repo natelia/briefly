@@ -1,6 +1,10 @@
 <main class="briefing">
   <% if @briefing %>
     <h1><%= @briefing.date.strftime("%A, %-d %B %Y") %></h1>
+
+    <%= render "section", id: "must-know", title: "Must Know", stories: @briefing.stories.where(section: :must_know) %>
+    <%= render "section", id: "for-you", title: "For You", stories: @briefing.stories.where(section: :for_you) %>
+    <%= render "section", id: "one-new-thing", title: "One New Thing", stories: @briefing.stories.where(section: :one_new_thing) %>
   <% else %>
     <p class="empty-state">Nothing here yet. Tomorrow's briefing builds overnight.</p>
   <% end %>
