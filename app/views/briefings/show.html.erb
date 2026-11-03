@@ -1,0 +1,7 @@
+<main class="briefing">
+  <% if @briefing %>
+    <h1><%= @briefing.date.strftime("%A, %-d %B %Y") %></h1>
+  <% else %>
+    <p class="empty-state">Nothing here yet. Tomorrow's briefing builds overnight.</p>
+  <% end %>
+</main>
