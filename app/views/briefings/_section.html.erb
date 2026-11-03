@@ -1,4 +1,7 @@
-<section class="briefing__section" id="<%= id %>">
-  <h2><%= title %></h2>
-  <%= render partial: "briefings/story", collection: stories, as: :story %>
+<section id="<%= id %>" class="mb-8">
+  <h2 class="mb-3 text-xs font-semibold tracking-wider text-ink-secondary uppercase">
+    <span class="mr-1.5 inline-block h-2 w-2 rounded-full align-middle <%= dot %>"></span>
+    <%= title %> — <%= tagline %>
+  </h2>
+  <%= render partial: "briefings/story", collection: stories, as: :story, locals: { bar: bar } %>
 </section>

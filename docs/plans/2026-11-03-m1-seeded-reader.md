@@ -92,14 +92,14 @@ Rails 8.1.4 app at `~/Projects/briefly` on mise-managed Ruby 3.4.12, clean git h
 
 ### Task 5: Design port
 
-**Files:** Modify `app/views/layouts/application.html.erb`, `app/views/briefings/show.html.erb`; Create `app/assets/stylesheets/briefing.css`.
+**Files:** Modify `app/views/layouts/application.html.erb`, `app/views/briefings/show.html.erb`, `_section.html.erb`, `_story.html.erb`; Create `app/assets/tailwind/application.css` (theme tokens), `app/helpers/briefings_helper.rb`; Gemfile (`tailwindcss-rails`).
 
 **Interfaces:**
 - Consumes: `docs/design/briefing-v3.html`.
 - Produces: greeting block ("Good morning." + date), chips row (static in M1), progress bar placeholder, dark theme from the mockup.
 
 - [ ] Step 1: No new test — T4's system test still passes after the port.
-- [ ] Step 2: Port layout + CSS from the mockup into `briefing.css` and the ERB; keep class names from the mockup (`briefing`, `section`, `story`, `progress`).
+- [ ] Step 2: Port layout from the mockup into ERB with Tailwind utilities; palette (gruvbox-dark, mockup's role colors) as `@theme` tokens in `app/assets/tailwind/application.css`; build with `bin/rails tailwindcss:build`.
 - [ ] Step 3: Run full system tests → PASS.
 - [ ] Step 4: Human check — `bin/dev`, open `http://localhost:3000`, compare against the mockup.
 - [ ] Step 5: Commit `feat: port v3 design to briefing page`.
