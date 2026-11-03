@@ -1,11 +1,26 @@
-<main class="briefing">
-  <% if @briefing %>
-    <h1><%= @briefing.date.strftime("%A, %-d %B %Y") %></h1>
+<% if @briefing %>
+  <header class="mb-2">
+    <h1 class="text-2xl font-bold"><%= greeting %></h1>
+    <p class="mt-1 text-sm text-ink-secondary"><%= @briefing.date.strftime("%A, %-d %B %Y") %> · about <%= [@briefing.stories.count * 2 + 2, 2].max %> minutes today.</p>
+  </header>
 
-    <%= render "section", id: "must-know", title: "Must Know", stories: @briefing.stories.where(section: :must_know) %>
-    <%= render "section", id: "for-you", title: "For You", stories: @briefing.stories.where(section: :for_you) %>
-    <%= render "section", id: "one-new-thing", title: "One New Thing", stories: @briefing.stories.where(section: :one_new_thing) %>
-  <% else %>
-    <p class="empty-state">Nothing here yet. Tomorrow's briefing builds overnight.</p>
-  <% end %>
-</main>
+  <div class="mb-6">
+    <div class="h-[5px] w-full overflow-hidden rounded-full bg-bg-tertiary">
+      <div class="h-full rounded-full bg-accent" style="width: 0%"></div>
+    </div>
+    <p class="mt-1.5 text-xs text-ink-secondary">This bar fills as you read. When it's full, you're caught up — that's the whole internet.</p>
+  </div>
+
+  <div class="mb-8 flex flex-wrap gap-2">
+    <span class="rounded-full bg-bg-tertiary px-2.5 py-0.5 text-xs text-ink-secondary">Must Know · 3 min</span>
+    <span class="rounded-full bg-bg-tertiary px-2.5 py-0.5 text-xs text-ink-secondary">For You · 6 min</span>
+    <span class="rounded-full bg-bg-tertiary px-2.5 py-0.5 text-xs text-ink-secondary">One New Thing · 3 min</span>
+    <span class="rounded-full bg-bg-tertiary px-2.5 py-0.5 text-xs text-ink-secondary">Check-in · 2 min</span>
+  </div>
+
+  <%= render "section", id: "must-know", title: "Must Know", tagline: "what matters in tech, whatever your interests", dot: "bg-accent", bar: "border-l-accent", stories: @briefing.stories.where(section: :must_know) %>
+  <%= render "section", id: "for-you", title: "For You", tagline: "picked for you", dot: "bg-success", bar: "border-l-success", stories: @briefing.stories.where(section: :for_you) %>
+  <%= render "section", id: "one-new-thing", title: "One New Thing", tagline: "outside your usual path", dot: "bg-warning", bar: "border-l-warning", stories: @briefing.stories.where(section: :one_new_thing) %>
+<% else %>
+  <p class="mt-20 text-center text-ink-secondary">Nothing here yet. Tomorrow's briefing builds overnight.</p>
+<% end %>

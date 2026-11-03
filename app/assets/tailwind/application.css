@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  /* Briefly palette — gruvbox-dark, roles from the v3 mockup (accent/success/warning/error) */
+  --color-bg-primary: #1d2021;
+  --color-bg-secondary: #282828;
+  --color-bg-tertiary: #3c3836;
+  --color-edge: #504945;
+  --color-ink-primary: #ebdbb2;
+  --color-ink-secondary: #bdae93;
+  --color-ink-tertiary: #a89984;
+  --color-accent: #83a598;
+  --color-success: #b8bb26;
+  --color-warning: #fabd2f;
+  --color-error: #fb4934;
+}
