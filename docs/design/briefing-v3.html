@@ -1,0 +1,132 @@
+<h2>The Tuesday Morning Briefing — v3</h2>
+<p class="subtitle">Only change: the three quiet ideas now have actual presence — the catch-up promise, the missed-day line, the inbox. Everything else identical.</p>
+
+<div class="mockup">
+  <div class="mockup-header">morning briefing — tuesday, 07:40</div>
+  <div class="mockup-body" style="max-width:720px">
+
+    <!-- MISSED DAY BAND (only appears when you actually skipped) -->
+    <div style="display:flex;align-items:center;gap:10px;background:var(--selected-bg);border:1px solid var(--accent);border-radius:10px;padding:10px 14px;margin-bottom:18px;font-size:0.85rem;color:var(--text-primary)">
+      <span>🗓️</span>
+      <span>You skipped Monday — nothing stacked. One thing mattered: <a href="#">npm supply-chain attack →</a></span>
+      <span style="margin-left:auto;color:var(--text-tertiary)">✕</span>
+    </div>
+
+    <!-- Greeting / promise -->
+    <div style="margin-bottom:8px">
+      <div style="font-size:1.4rem;font-weight:700;color:var(--text-primary)">Good morning, Natalia.</div>
+      <div style="font-size:0.85rem;color:var(--text-secondary);margin-top:4px">About 14 minutes today.</div>
+    </div>
+
+    <!-- CATCH-UP PROMISE as a progress strip -->
+    <div style="margin-bottom:6px">
+      <div style="height:5px;background:var(--bg-tertiary);border-radius:99px;overflow:hidden">
+        <div style="width:7%;height:100%;background:var(--accent);border-radius:99px"></div>
+      </div>
+      <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:5px">This bar fills as you read. When it's full, you're caught up — that's the whole internet.</div>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 8px">
+      <span style="font-size:0.7rem;background:var(--bg-tertiary);color:var(--text-secondary);padding:3px 10px;border-radius:99px">Must Know · 3 min</span>
+      <span style="font-size:0.7rem;background:var(--bg-tertiary);color:var(--text-secondary);padding:3px 10px;border-radius:99px">For You · 6 min</span>
+      <span style="font-size:0.7rem;background:var(--bg-tertiary);color:var(--text-secondary);padding:3px 10px;border-radius:99px">One New Thing · 3 min</span>
+      <span style="font-size:0.7rem;background:var(--bg-tertiary);color:var(--text-secondary);padding:3px 10px;border-radius:99px">Check-in · 2 min</span>
+    </div>
+
+    <!-- INBOX, elevated -->
+    <div style="display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:99px;padding:6px 14px;margin-bottom:24px;font-size:0.8rem;color:var(--text-primary);width:fit-content">
+      <span>📥</span><span>Inbox — 2 links waiting (you + your brother)</span><span style="color:var(--accent)">→</span>
+    </div>
+
+    <!-- MUST KNOW -->
+    <div class="label" style="margin-bottom:10px"><span style="color:var(--accent)">●</span>&nbsp; MUST KNOW — what matters in tech, whatever your interests</div>
+
+    <div style="border:1px solid var(--border);border-radius:12px;padding:16px;margin:0 0 12px">
+      <div style="font-size:1.05rem;font-weight:700;color:var(--text-primary);line-height:1.3">Frontier models get long-horizon "agent mode"</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin:3px 0 8px">anthropic.com · 2 min read · AI</div>
+      <div style="font-size:0.9rem;color:var(--text-primary);opacity:0.85">Claude can now run multi-hour tasks driving a real browser and terminal; a competing framework shipped from OpenAI the same week.</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:10px;padding:8px 12px;background:var(--bg-tertiary);border-left:3px solid var(--accent);border-radius:6px"><b style="color:var(--text-primary)">Why it matters:</b> agent-shaped AI is moving from demo to product. It will change what "developer work" means on a junior-dev timescale, not a senior one.</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:10px"><a href="#">source →</a> &nbsp; <a href="#">save</a></div>
+    </div>
+
+    <div style="border:1px solid var(--border);border-radius:12px;padding:16px;margin:0 0 12px">
+      <div style="font-size:1.05rem;font-weight:700;color:var(--text-primary);line-height:1.3">npm supply-chain attack hit millions of downloads</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin:3px 0 8px">github.com/advisories · 1 min read · Security</div>
+      <div style="font-size:0.9rem;color:var(--text-primary);opacity:0.85">A maintainer account takeover pushed malware into a popular package; builds worldwide pulled it within hours.</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:10px;padding:8px 12px;background:var(--bg-tertiary);border-left:3px solid var(--accent);border-radius:6px"><b style="color:var(--text-primary)">Why it matters:</b> you will install a dependency this year. This is why lockfiles, pinned versions and minimal deps are habits now, not paranoia.</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:10px"><a href="#">source →</a> &nbsp; <a href="#">save</a></div>
+    </div>
+
+    <div style="border:1px solid var(--border);border-radius:12px;padding:16px;margin:0 0 24px">
+      <div style="font-size:1.05rem;font-weight:700;color:var(--text-primary);line-height:1.3">First EU AI Act compliance deadlines bite</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin:3px 0 8px">arstechnica.com · 1 min read · Industry</div>
+      <div style="font-size:0.9rem;color:var(--text-primary);opacity:0.85">Obligations for general-purpose models kicked in; at least one provider pulled features from Europe rather than certify.</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:10px;padding:8px 12px;background:var(--bg-tertiary);border-left:3px solid var(--accent);border-radius:6px"><b style="color:var(--text-primary)">Why it matters:</b> regulation now decides which AI features exist where you work. Worth knowing before you build on one.</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:10px"><a href="#">source →</a> &nbsp; <a href="#">save</a></div>
+    </div>
+
+    <!-- FOR YOU -->
+    <div class="label" style="margin-bottom:10px"><span style="color:var(--success)">●</span>&nbsp; FOR YOU — picked for a junior Rails dev tracking AI tooling</div>
+
+    <div style="border:1px solid var(--border);border-radius:12px;padding:16px;margin:0 0 12px">
+      <div style="font-size:1.05rem;font-weight:700;color:var(--text-primary);line-height:1.3">Rails 8's quiet revolution: solid_queue, solid_cache, solid_cable</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin:3px 0 8px">railsguild.io · 4 min read · Rails</div>
+      <div style="font-size:0.9rem;color:var(--text-primary);opacity:0.85">The default Rails stack is shedding Redis. Background jobs, caching and websockets now run on the database you already have.</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:10px;padding:8px 12px;background:var(--bg-tertiary);border-left:3px solid var(--success);border-radius:6px"><b style="color:var(--text-primary)">Why you:</b> the Rails you'll meet at your next job is this one. Knowing why — and when you'd still reach for Redis — is core backend judgment.</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:6px;padding:8px 12px;background:var(--bg-tertiary);border-radius:6px"><b style="color:var(--text-primary)">Try it this week:</b> fresh <code>rails new</code>, move one job from Sidekiq to solid_queue. ~30 min.</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:10px"><a href="#">source →</a> &nbsp; <a href="#">save</a> &nbsp; · &nbsp; 👍 more like this &nbsp; ✕ not for me &nbsp; ✓ already know</div>
+    </div>
+
+    <div style="border:1px solid var(--border);border-radius:12px;padding:16px;margin:0 0 12px">
+      <div style="font-size:1.05rem;font-weight:700;color:var(--text-primary);line-height:1.3">MCP: the emerging universal port between AI assistants and your tools</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin:3px 0 8px">modelcontextprotocol.io · 3 min read · AI tooling</div>
+      <div style="font-size:0.9rem;color:var(--text-primary);opacity:0.85">One open standard so any assistant can talk to any database, editor or API. Anthropic started it; half the industry now ships servers for it.</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:10px;padding:8px 12px;background:var(--bg-tertiary);border-left:3px solid var(--success);border-radius:6px"><b style="color:var(--text-primary)">Why you:</b> if tools get a universal port, knowing it early compounds — you can wire your own editor, DB and docs into whichever assistant you use.</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:10px"><a href="#">source →</a> &nbsp; <a href="#">save</a> &nbsp; · &nbsp; 👍 more like this &nbsp; ✕ not for me &nbsp; ✓ already know</div>
+    </div>
+
+    <div style="border:1px solid var(--border);border-radius:12px;padding:16px;margin:0 0 24px">
+      <div style="font-size:1.05rem;font-weight:700;color:var(--text-primary);line-height:1.3">Ask HN: "What did you learn the hard way as a junior developer?"</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin:3px 0 8px">news.ycombinator.com · 2 min skim · Discussion</div>
+      <div style="font-size:0.9rem;color:var(--text-primary);opacity:0.85">400 comments of scar tissue: estimation, debugging habits, code review etiquette, saying "I don't know" out loud.</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:10px;padding:8px 12px;background:var(--bg-tertiary);border-left:3px solid var(--success);border-radius:6px"><b style="color:var(--text-primary)">Why you:</b> vicarious experience at roughly zero cost — and a place to steal judgment from people ten years ahead of you.</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:10px"><a href="#">source →</a> &nbsp; <a href="#">save</a> &nbsp; · &nbsp; 👍 more like this &nbsp; ✕ not for me &nbsp; ✓ already know</div>
+    </div>
+
+    <!-- ONE NEW THING -->
+    <div class="label" style="margin-bottom:10px"><span style="color:var(--warning)">●</span>&nbsp; ONE NEW THING — outside your usual path</div>
+
+    <div style="border:1px solid var(--border);border-radius:12px;padding:18px;margin:0 0 24px">
+      <div style="font-size:1.05rem;font-weight:700;color:var(--text-primary);line-height:1.35">CRDTs: how Figma and Google Docs merge edits with no one saying "wait your turn"</div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin:3px 0 12px">3 min · a concept from distributed systems</div>
+      <div style="font-size:0.9rem;color:var(--text-primary);opacity:0.85;line-height:1.6">
+        Two people edit the same document. The obvious answer is a lock — one edits, the other waits. Painful. The database answer is a transaction — everyone waits a little. Also painful.<br><br>
+        A <b>CRDT</b> (conflict-free replicated data type) takes a third path: every edit carries a tiny bit of math so that no matter what order the edits arrive in, everyone converges to the same result. No lock, no referee, no central "yes".<br><br>
+        That's why your Google Doc works offline and merges cleanly when you reconnect — and why sync engines are quietly becoming a big deal in app architecture.
+      </div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:12px"><a href="#">go deeper (12 min) →</a> &nbsp; <a href="#">save this topic</a></div>
+    </div>
+
+    <!-- CHECK-IN -->
+    <div class="label" style="margin-bottom:10px"><span style="color:var(--error)">●</span>&nbsp; TWO-MINUTE CHECK — optional, zero stakes</div>
+
+    <div style="border:1px solid var(--border);border-radius:12px;padding:16px;margin:0 0 24px">
+      <div style="font-size:0.9rem;color:var(--text-primary);line-height:1.5">From today's Must Know: the npm attack spread fast because most packages depend on other packages. What's that kind of dependency called?</div>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <span style="border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:0.8rem;color:var(--text-primary)">a) circular dependency</span>
+        <span style="border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:0.8rem;color:var(--text-primary)">b) transitive dependency</span>
+        <span style="border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:0.8rem;color:var(--text-primary)">c) dynamic linking</span>
+      </div>
+      <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:10px">Wrong answers explain themselves. No streak, no score, nothing breaks if you skip.</div>
+    </div>
+
+    <!-- END -->
+    <div style="border-top:2px solid var(--border);padding-top:14px;text-align:center">
+      <div style="font-weight:700;color:var(--text-primary);font-size:1.05rem">That's everything — you're caught up. ✅</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px">Saved for later (7) → &nbsp;·&nbsp; <a href="#">Inbox: 2 links →</a></div>
+    </div>
+
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:16px">Reload the tab if you don't see the missed-day band at the very top. Then tell me: do the three ideas land now?</p>
