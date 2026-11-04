@@ -11,6 +11,10 @@
     {
       "fingerprint": "2475fcaeda142be1bbff00c037caabd19e6d56e9475b01ccf6bedc6f4cfb3c28",
       "note": "story.url is seeded content, not user input"
+    },
+    {
+      "fingerprint": "4e9aa050ffbea6c6d2aab981a0e6dad02e39e1e7c10b0c49d28f3a926842905a",
+      "note": "story.url is seeded content, not user input"
     }
   ]
 }
