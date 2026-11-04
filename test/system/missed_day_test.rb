@@ -10,7 +10,8 @@ class MissedDayTest < ApplicationSystemTestCase
     visit root_url
 
     assert_text "You skipped #{Date.yesterday.strftime("%A")}. Nothing stacked — one thing mattered: The unread one"
-    assert_link "catch up on #{Date.yesterday.strftime("%A")}", href: briefing_path(date: Date.yesterday)
+    assert_link "The unread one", href: briefing_path(date: Date.yesterday)
+    assert_no_button "catch up"
   end
 
   test "band hidden when yesterday read or missing" do
