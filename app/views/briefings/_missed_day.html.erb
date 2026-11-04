@@ -1,0 +1,3 @@
+<p class="mb-2 text-[0.9375rem] text-ink-tertiary">
+  You skipped <%= briefing.date.strftime("%A") %>. Nothing stacked — one thing mattered: <%= link_to briefing.stories.unread.first.title, briefing_path(date: briefing.date), class: "underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %>.
+</p>

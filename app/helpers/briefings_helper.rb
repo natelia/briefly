@@ -1,4 +1,12 @@
 module BriefingsHelper
+  def missed_day_briefing(briefing)
+    day = Briefing.for_date(briefing.date - 1.day)
+    return nil if day.nil?
+    return nil if day.stories.unread.empty?
+
+    day
+  end
+
   def greeting(now = Time.current)
     return "Good morning, Natalia." if now.hour < 12
     return "Good afternoon, Natalia." if now.hour < 18
