@@ -5,10 +5,13 @@
 <h1 class="mt-4 text-[2rem] leading-[1.12]"><%= @story.title %></h1>
 <p class="mt-2.5 font-mono text-xs text-ink-tertiary"><%= @story.source_name %> · <%= @story.section.to_s.tr("_", " ") %></p>
 
-<p class="mt-6 text-[1.125rem] leading-[1.65] text-ink-secondary"><%= @story.summary %></p>
+<% paragraphs = (@story.digest.presence || @story.summary).split(/\n\n+/) %>
+<% paragraphs.each do |paragraph| %>
+  <p class="mt-5 text-[1.0625rem] leading-[1.7] text-ink-secondary"><%= paragraph %></p>
+<% end %>
 
 <% if @story.stretch? && @story.why_it_matters.present? %>
-  <p class="mt-6 rounded-xl border-l-4 bg-bg-secondary px-4.5 py-4 text-[1.0625rem] leading-[1.65] text-ink-secondary" style="border-left-color: var(--color-<%= section_hue(@story) %>);">
+  <p class="mt-7 rounded-xl border-l-4 bg-bg-secondary px-4.5 py-4 text-[1.0625rem] leading-[1.65] text-ink-secondary" style="border-left-color: var(--color-<%= section_hue(@story) %>);">
     <strong class="font-semibold text-ink-primary">Why this matters for you:</strong> <%= @story.why_it_matters %>
   </p>
 <% end %>

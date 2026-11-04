@@ -8,13 +8,14 @@ class StoryPageTest < ApplicationSystemTestCase
       url: "https://blog.cloudflare.com/cloudflare-outage/",
       source_name: "blog.cloudflare.com",
       summary: "A bad config push broke DNS for an hour.",
+      digest: "One paragraph of the real story. The failure was amplification.",
       stretch: true,
       why_it_matters: "A stretch pick: small sites felt it first. Your side project lives on that edge.")
 
     visit root_url
     click_link "Cloudflare outage postmortem"
 
-    assert_text "A bad config push broke DNS for an hour."
+    assert_text "One paragraph of the real story. The failure was amplification." # the digest, not the card's one-liner
     assert_text "Why this matters for you:"
     assert_link "read the source", href: "https://blog.cloudflare.com/cloudflare-outage/"
     assert_link "back to the briefing"
