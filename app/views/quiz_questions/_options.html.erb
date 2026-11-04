@@ -1,0 +1,3 @@
+<% quiz.options.each_with_index do |option, index| %>
+  <%= button_to option, answer_quiz_question_path(quiz), method: :post, params: { choice: index }, data: { turbo_stream: true }, class: "mark-btn", style: "--bh: var(--color-s4); --bhi: var(--color-s4-ink);" %>
+<% end %>
