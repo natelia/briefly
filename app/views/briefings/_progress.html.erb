@@ -1,0 +1,6 @@
+<div id="<%= dom_id(briefing, :progress) %>" class="mb-6">
+  <div class="h-[5px] w-full overflow-hidden rounded-full bg-bg-tertiary">
+    <div class="h-full rounded-full bg-accent" style="width: <%= (briefing.read_fraction * 100).round %>%"></div>
+  </div>
+  <p class="mt-1.5 text-xs text-ink-secondary"><%= briefing.stories.read.count %> of <%= briefing.stories.count %> read — this bar fills as you read. When it's full, you're caught up, that's the whole internet.</p>
+</div>

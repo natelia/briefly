@@ -1,15 +1,20 @@
-<article class="mb-3 rounded-xl border border-edge p-4">
+<article class="mb-3 rounded-xl border border-edge p-4" id="<%= dom_id(story) %>">
   <h3 class="text-base leading-snug font-bold">
     <%= link_to story.title, story.url, target: "_blank", rel: "noopener", class: "hover:underline" %>
   </h3>
   <p class="mt-1 mb-2 text-xs text-ink-tertiary"><%= story.source_name %></p>
   <p class="text-sm text-ink-primary opacity-85"><%= story.summary %></p>
   <% if story.stretch? %>
-    <p class="mt-3 rounded-md border-l-4 <%= bar %> bg-bg-tertiary px-3 py-2 text-sm text-ink-secondary">
+    <p class="mt-3 rounded-md border-l-4 <%= section_bar(story) %> bg-bg-tertiary px-3 py-2 text-sm text-ink-secondary">
       <strong class="text-ink-primary">Why this matters for you:</strong> <%= story.why_it_matters %>
     </p>
   <% end %>
-  <p class="mt-3 text-xs">
+  <p class="mt-3 flex items-center gap-3 text-xs">
     <%= link_to "source →", story.url, target: "_blank", rel: "noopener", class: "text-ink-tertiary hover:underline" %>
+    <% if story.read? %>
+      <span class="text-ink-tertiary">✓ read</span>
+    <% else %>
+      <%= button_to "Mark read", mark_read_story_path(story), method: :patch, data: { turbo_stream: true }, class: "cursor-pointer rounded-md border border-edge px-2.5 py-1 text-xs text-ink-secondary hover:text-ink-primary" %>
+    <% end %>
   </p>
 </article>

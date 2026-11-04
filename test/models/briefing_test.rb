@@ -19,4 +19,19 @@ class BriefingTest < ActiveSupport::TestCase
     assert_equal briefing, Briefing.for_date(Date.new(2026, 11, 3))
     assert_nil Briefing.for_date(Date.new(2026, 11, 4))
   end
+
+  test "read_fraction reports caught-up states" do
+    empty = create(:briefing)
+    assert_equal Rational(1), empty.read_fraction
+
+    partial = create(:briefing)
+    create(:story, briefing: partial, read_at: Time.current)
+    create(:story, briefing: partial)
+    assert_equal Rational(1, 2), partial.read_fraction
+
+    full = create(:briefing)
+    create(:story, briefing: full, read_at: Time.current)
+    create(:story, briefing: full, read_at: Time.current)
+    assert_equal Rational(1), full.read_fraction
+  end
 end
