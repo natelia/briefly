@@ -28,10 +28,7 @@ class QuizTest < ApplicationSystemTestCase
     within "section#check-in" do
       click_button "Clustered disk nexus"
       assert_text "Not quite — A CDN caches content close to readers."
-
-      # the miss teaches, then the options quietly return
-      click_button "Content delivery network"
-      assert_text "Right."
+      assert_no_button "Content delivery network"
     end
 
     assert_no_text /fail|score|wrong/i
