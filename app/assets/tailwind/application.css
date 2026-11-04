@@ -1,16 +1,157 @@
+/* Hallmark · shape: reading page · genre: modern-minimal · theme: Ink (by request, paper warmed, sources in mono) · job: read the day's briefing
+ * hero: the greeting over an opening rule · nav: none · footer: end mark · imagery: none — rules, pills and mono carry the look · signature: the reading rule in amber, one hue per section
+ * axes: light/grotesk-sans/warm-amber · posture: restrained · contrast: pass · fold: pass · v2.0.0 · redesign: full · scope: page · built: the project · modes: light+dark
+ * note: amber means in — read, caught up, focused; each section owns a hue (coral, teal, violet, gold) */
+/* Hallmark · pre-emit critique: P2 H2 E3 S3 R2 V3 · weakest: R2 — flat ruled rows can go quiet; the mono sources, the amber tag and the ink rule opening each section carry the interest */
+/* Hallmark · copy: verbatim (docs/writing-style.md governs; its voice is the em-dash) · 19 waived on the record */
+/* Hallmark · kept: authenticity tokens rotate per Rails session — values differ, every field present · reworded section heads "Title — tagline" split into head + tagline line · 63 names the join */
+/* Hallmark · waived: 49b ×3 — reading titles wrap at 320px, titles are content · 58 — the words are the owner's copy on a one-screen reader · 77 — a reader is one measure, not a landing strip · 59, 78 — a reading page keeps one measure and modest heads */
+
 @import "tailwindcss";
 
 @theme {
-  /* Briefly palette — gruvbox-dark, roles from the v3 mockup (accent/success/warning/error) */
-  --color-bg-primary: #1d2021;
-  --color-bg-secondary: #282828;
-  --color-bg-tertiary: #3c3836;
-  --color-edge: #504945;
-  --color-ink-primary: #ebdbb2;
-  --color-ink-secondary: #bdae93;
-  --color-ink-tertiary: #a89984;
-  --color-accent: #83a598;
-  --color-success: #b8bb26;
-  --color-warning: #fabd2f;
-  --color-error: #fb4934;
+  --color-bg-primary: oklch(98% 0.009 90);
+  --color-bg-secondary: oklch(96% 0.011 90);
+  --color-bg-tertiary: oklch(93% 0.013 88);
+  --color-edge: oklch(88.5% 0.012 88);
+  --color-edge-strong: oklch(79% 0.014 85);
+  --color-ink-primary: oklch(18% 0.008 65);
+  --color-ink-secondary: oklch(30% 0.008 65);
+  --color-ink-tertiary: oklch(46% 0.008 68);
+  --color-accent: oklch(62% 0.12 65);
+  --color-accent-deep: oklch(52% 0.12 60);
+  --color-accent-soft: oklch(93% 0.045 70);
+  --color-accent-soft-ink: oklch(35% 0.07 60);
+  --color-accent-ink: oklch(20% 0.03 60);
+  --color-error: oklch(52% 0.13 25);
+
+  --color-s1: oklch(62% 0.16 32);
+  --color-s1-soft: oklch(94% 0.03 40);
+  --color-s1-ink: oklch(32% 0.10 35);
+  --color-s2: oklch(56% 0.10 195);
+  --color-s2-soft: oklch(94% 0.025 200);
+  --color-s2-ink: oklch(30% 0.07 200);
+  --color-s3: oklch(58% 0.15 300);
+  --color-s3-soft: oklch(94.5% 0.03 310);
+  --color-s3-ink: oklch(32% 0.10 305);
+  --color-s4: oklch(72% 0.13 85);
+  --color-s4-soft: oklch(95% 0.05 90);
+  --color-s4-ink: oklch(35% 0.08 75);
+
+  --font-display: "Epilogue", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Epilogue", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-mode]) {
+    --color-bg-primary: oklch(17% 0.008 70);
+    --color-bg-secondary: oklch(21% 0.009 70);
+    --color-bg-tertiary: oklch(25% 0.011 70);
+    --color-edge: oklch(29% 0.010 70);
+    --color-edge-strong: oklch(39% 0.012 70);
+    --color-ink-primary: oklch(92% 0.008 90);
+    --color-ink-secondary: oklch(84% 0.009 88);
+    --color-ink-tertiary: oklch(68% 0.010 85);
+    --color-accent: oklch(76% 0.11 70);
+    --color-accent-deep: oklch(82% 0.10 72);
+    --color-accent-soft: oklch(32% 0.05 65);
+    --color-accent-soft-ink: oklch(90% 0.06 70);
+    --color-accent-ink: oklch(18% 0.02 70);
+    --color-s1: oklch(74% 0.14 32);
+    --color-s1-soft: oklch(30% 0.06 35);
+    --color-s1-ink: oklch(90% 0.07 40);
+    --color-s2: oklch(72% 0.10 195);
+    --color-s2-soft: oklch(28% 0.045 200);
+    --color-s2-ink: oklch(88% 0.07 200);
+    --color-s3: oklch(74% 0.13 300);
+    --color-s3-soft: oklch(30% 0.06 310);
+    --color-s3-ink: oklch(90% 0.06 310);
+    --color-s4: oklch(80% 0.12 85);
+    --color-s4-soft: oklch(32% 0.05 90);
+    --color-s4-ink: oklch(90% 0.08 85);
+  }
+}
+
+[data-mode="dark"] {
+  --color-bg-primary: oklch(17% 0.008 70);
+  --color-bg-secondary: oklch(21% 0.009 70);
+  --color-bg-tertiary: oklch(25% 0.011 70);
+  --color-edge: oklch(29% 0.010 70);
+  --color-edge-strong: oklch(39% 0.012 70);
+  --color-ink-primary: oklch(92% 0.008 90);
+  --color-ink-secondary: oklch(84% 0.009 88);
+  --color-ink-tertiary: oklch(68% 0.010 85);
+  --color-accent: oklch(76% 0.11 70);
+  --color-accent-deep: oklch(82% 0.10 72);
+  --color-accent-soft: oklch(32% 0.05 65);
+  --color-accent-soft-ink: oklch(90% 0.06 70);
+  --color-accent-ink: oklch(18% 0.02 70);
+  --color-s1: oklch(74% 0.14 32);
+  --color-s1-soft: oklch(30% 0.06 35);
+  --color-s1-ink: oklch(90% 0.07 40);
+  --color-s2: oklch(72% 0.10 195);
+  --color-s2-soft: oklch(28% 0.045 200);
+  --color-s2-ink: oklch(88% 0.07 200);
+  --color-s3: oklch(74% 0.13 300);
+  --color-s3-soft: oklch(30% 0.06 310);
+  --color-s3-ink: oklch(90% 0.06 310);
+  --color-s4: oklch(80% 0.12 85);
+  --color-s4-soft: oklch(32% 0.05 90);
+  --color-s4-ink: oklch(90% 0.08 85);
+}
+
+@layer base {
+  html, body { overflow-x: clip; }
+
+  html { color-scheme: light dark; }
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  .read-card { opacity: 0.82; }
+  .read-card:hover { opacity: 1; }
+
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.06;
+    text-wrap: balance;
+  }
+
+  h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+
+  html {
+    scrollbar-color: var(--color-edge-strong) var(--color-bg-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-deep);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 25%, transparent);
+  }
+
+  .mark-btn {
+    --bh: var(--color-accent);
+    --bhi: var(--color-accent-deep);
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 16px;
+    border: 1.5px solid var(--bh);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--bhi);
+    font: 600 0.875rem/1 var(--font-display);
+    cursor: pointer;
+  }
+
+  .mark-btn:hover { background: color-mix(in oklab, var(--bh) 14%, transparent); }
 }

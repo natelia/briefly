@@ -45,4 +45,12 @@ class StoryTest < ActiveSupport::TestCase
 
     assert_equal 1, briefing.stories.unread.count
   end
+  test "mark_unread reverts a read story and stays idempotent" do
+    story = create(:story, read_at: Time.current)
+    story.mark_unread!
+    assert_not story.reload.read?
+
+    story.mark_unread!
+    assert_not story.reload.read?
+  end
 end

@@ -20,6 +20,16 @@ class BriefingTest < ActiveSupport::TestCase
     assert_nil Briefing.for_date(Date.new(2026, 11, 4))
   end
 
+  test "before and after find the neighbouring briefings" do
+    older = create(:briefing, date: Date.new(2026, 11, 2))
+    create(:briefing, date: Date.new(2026, 11, 3))
+    newer = create(:briefing, date: Date.new(2026, 11, 5))
+
+    assert_equal older, Briefing.before(Date.new(2026, 11, 3))
+    assert_equal newer, Briefing.after(Date.new(2026, 11, 3))
+    assert_nil Briefing.before(Date.new(2026, 11, 2))
+  end
+
   test "read_fraction reports caught-up states" do
     empty = create(:briefing)
     assert_equal Rational(1), empty.read_fraction

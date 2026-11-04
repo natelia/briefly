@@ -1,7 +1,8 @@
-<section id="<%= id %>" class="mb-8">
-  <h2 class="mb-3 text-xs font-semibold tracking-wider text-ink-secondary uppercase">
-    <span class="mr-1.5 inline-block h-2 w-2 rounded-full align-middle <%= dot %>"></span>
-    <%= title %> — <%= tagline %>
-  </h2>
-  <%= render partial: "briefings/story", collection: stories, as: :story, locals: { bar: bar } %>
+<section id="<%= id %>" class="mb-11 scroll-mt-6">
+  <div class="border-t border-ink-primary pt-3">
+    <h2 class="text-[1.3rem]"><%= title %></h2>
+    <span class="mt-2 block h-1 w-9 rounded-full" style="background: var(--color-<%= hue %>);"></span>
+  </div>
+  <p class="mb-1 mt-2 text-[0.8125rem] font-medium text-ink-tertiary"><%= tagline %></p>
+  <%= render partial: "briefings/story", collection: stories, as: :story %>
 </section>

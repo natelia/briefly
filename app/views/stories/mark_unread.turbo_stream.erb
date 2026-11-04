@@ -1,0 +1,2 @@
+<%= turbo_stream.replace @story, partial: "briefings/story", locals: { story: @story } %>
+<%= turbo_stream.replace dom_id(@story.briefing, :progress), partial: "briefings/progress", locals: { briefing: @story.briefing } %>
