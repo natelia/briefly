@@ -5,10 +5,12 @@
     "one-new-thing" => { title: "One New Thing", tagline: "outside your usual path", hue: "s3", stories: @briefing.stories.where(section: :one_new_thing) }
   } %>
   <% previous = Briefing.before(@briefing.date) %>
+  <% missed = missed_day_briefing(@briefing) %>
   <% is_today = @briefing.date == Date.current %>
+  <%= render "missed_day", briefing: missed if missed %>
   <header class="mb-8 pt-8">
     <h1 class="text-[2.25rem] sm:text-[2.5rem]"><%= greeting %></h1>
-    <p class="mt-3 text-[0.9375rem] text-ink-tertiary"><%= @briefing.date.strftime("%A, %-d %B %Y") %><% if previous %> — <span class="font-mono tabular-nums"><%= previous.date.strftime("%-d %b") %></span> is still there<%= link_to "read it", briefing_path(date: previous.date), class: "ml-1 underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %><% unless is_today %><span class="text-edge-strong"> | </span><%= link_to "back to today", root_path, class: "underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %></p>
+    <p class="mt-3 text-[0.9375rem] text-ink-tertiary"><%= @briefing.date.strftime("%A, %-d %B %Y") %><% if previous && missed.nil? %> — <span class="font-mono tabular-nums"><%= previous.date.strftime("%-d %b") %></span> is still there<%= link_to "read it", briefing_path(date: previous.date), class: "ml-1 underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %><% unless is_today %><span class="text-edge-strong"> | </span><%= link_to "back to today", root_path, class: "underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %></p>
   </header>
 
   <%= render "progress", briefing: @briefing %>
