@@ -28,6 +28,17 @@
     <%= render "section", id: id, title: s[:title], tagline: s[:tagline], hue: s[:hue], stories: s[:stories] %>
   <% end %>
 
+  <% if @briefing.concept_cards.any? %>
+    <section id="concept" class="mb-11 scroll-mt-6">
+      <div class="border-t border-ink-primary pt-3">
+        <h2 class="text-[1.3rem]">Concept of the day</h2>
+        <span class="mt-2 block h-1 w-9 rounded-full bg-accent"></span>
+      </div>
+      <p class="mb-4 mt-2 text-[0.8125rem] font-medium text-ink-tertiary">one idea, explained in three blocks</p>
+      <%= render partial: "briefings/concept_card", collection: @briefing.concept_cards, as: :card %>
+    </section>
+  <% end %>
+
   <% if @briefing.quiz_questions.any? %>
     <section id="check-in" class="mb-11 scroll-mt-6">
       <div class="border-t border-ink-primary pt-3">

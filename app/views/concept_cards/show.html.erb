@@ -1,0 +1,31 @@
+<p class="font-mono text-xs text-ink-tertiary">
+  <%= link_to "back to the briefing", briefing_path(date: @concept_card.briefing.date), class: "underline decoration-edge decoration-1 underline-offset-4 hover:text-accent" %>
+</p>
+
+<h1 class="mt-4 text-[2rem] leading-[1.1]"><%= @concept_card.title %></h1>
+<p class="mt-2 font-mono text-xs text-ink-tertiary">concept · <%= @concept_card.domain %><% if @concept_card.series_name %> · <%= @concept_card.series_name %>, part <%= @concept_card.series_position %><% end %></p>
+
+<section class="mt-9 border-t border-ink-primary pt-3">
+  <h2 class="text-[1.3rem]">What it is</h2>
+  <p class="mt-2.5 text-[1.0625rem] leading-[1.65] text-ink-secondary"><%= @concept_card.what_it_is %></p>
+</section>
+
+<% if @concept_card.how_it_works.present? %>
+  <section class="mt-8 border-t border-ink-primary pt-3">
+    <h2 class="text-[1.3rem]">How it works</h2>
+    <p class="mt-2.5 text-[1.0625rem] leading-[1.65] text-ink-secondary"><%= @concept_card.how_it_works %></p>
+  </section>
+<% end %>
+
+<% if @concept_card.why_you_care.present? %>
+  <section class="mt-8 border-t border-ink-primary pt-3">
+    <h2 class="text-[1.3rem]">Why you care</h2>
+    <p class="mt-2.5 text-[1.0625rem] leading-[1.65] text-ink-secondary"><%= @concept_card.why_you_care %></p>
+  </section>
+<% end %>
+
+<% if @concept_card.deeper_link.present? %>
+  <p class="mt-9">
+    <%= link_to "go deeper", @concept_card.deeper_link, target: "_blank", rel: "noopener", class: "mark-btn no-underline" %>
+  </p>
+<% end %>

@@ -1,0 +1,9 @@
+<div class="mb-4 rounded-2xl border border-edge bg-bg-secondary px-5 py-4">
+  <p class="font-mono text-xs text-ink-tertiary">concept · <%= card.domain %></p>
+  <p class="mt-1.5 text-[1.0625rem]">
+    <%= link_to card.title, concept_card_path(card), class: "font-semibold underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %>
+  </p>
+  <% if card.series_name %>
+    <p class="mt-1 text-[0.8125rem] text-ink-tertiary"><%= card.series_name %>, part <%= card.series_position %></p>
+  <% end %>
+</div>
