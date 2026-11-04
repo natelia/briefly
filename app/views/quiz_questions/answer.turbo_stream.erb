@@ -1,0 +1,1 @@
+<%= turbo_stream.replace dom_id(@quiz_question), partial: "quiz_questions/answered", locals: { quiz: @quiz_question, choice: @choice } %>

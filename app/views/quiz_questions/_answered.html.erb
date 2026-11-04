@@ -1,0 +1,12 @@
+<div class="mb-4 rounded-2xl px-5 py-4" id="<%= dom_id(quiz) %>" style="background: var(--color-s4-soft);">
+  <p class="text-[1.0625rem] leading-[1.5] text-ink-secondary"><strong class="font-semibold text-ink-primary"><%= quiz.question %></strong></p>
+  <% if quiz.correct?(choice) %>
+    <p class="mt-3 text-[0.9375rem] font-medium" style="color: var(--color-s4-ink);">Right.</p>
+  <% else %>
+    <p class="mt-3 text-[0.9375rem] font-medium" style="color: var(--color-s4-ink);">Not quite — <%= quiz.explanation %></p>
+  <% end %>
+  <% if quiz.correct?(choice) %>
+    <p class="mt-1.5 text-[0.9375rem] leading-[1.6] text-ink-secondary"><%= quiz.explanation %></p>
+  <% end %>
+  <p class="mt-3 font-mono text-xs text-ink-tertiary">check-in · one question a day</p>
+</div>

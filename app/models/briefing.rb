@@ -1,5 +1,6 @@
 class Briefing < ApplicationRecord
   has_many :stories, dependent: :destroy
+  has_many :quiz_questions, dependent: :destroy
 
   validates :date, presence: true, uniqueness: true
 
