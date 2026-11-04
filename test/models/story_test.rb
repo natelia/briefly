@@ -16,8 +16,8 @@ class StoryTest < ActiveSupport::TestCase
     story = build(:story, title: nil, summary: nil)
 
     assert_not story.valid?
-    assert_equal ["can't be blank"], story.errors[:title]
-    assert_equal ["can't be blank"], story.errors[:summary]
+    assert_equal [ "can't be blank" ], story.errors[:title]
+    assert_equal [ "can't be blank" ], story.errors[:summary]
   end
 
   test "requires a briefing" do
