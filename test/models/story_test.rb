@@ -16,8 +16,8 @@ class StoryTest < ActiveSupport::TestCase
     story = build(:story, title: nil, summary: nil)
 
     assert_not story.valid?
-    assert_equal ["can't be blank"], story.errors[:title]
-    assert_equal ["can't be blank"], story.errors[:summary]
+    assert_equal [ "can't be blank" ], story.errors[:title]
+    assert_equal [ "can't be blank" ], story.errors[:summary]
   end
 
   test "requires a briefing" do
@@ -44,5 +44,13 @@ class StoryTest < ActiveSupport::TestCase
     create(:story, briefing:, title: "Unread")
 
     assert_equal 1, briefing.stories.unread.count
+  end
+  test "mark_unread reverts a read story and stays idempotent" do
+    story = create(:story, read_at: Time.current)
+    story.mark_unread!
+    assert_not story.reload.read?
+
+    story.mark_unread!
+    assert_not story.reload.read?
   end
 end

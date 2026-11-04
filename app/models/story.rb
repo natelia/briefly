@@ -13,4 +13,8 @@ class Story < ApplicationRecord
   def mark_read!
     update!(read_at: Time.current) unless read?
   end
+
+  def mark_unread!
+    update!(read_at: nil) if read?
+  end
 end

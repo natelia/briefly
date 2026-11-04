@@ -1,20 +1,39 @@
 <% if @briefing %>
-  <header class="mb-2">
-    <h1 class="text-2xl font-bold"><%= greeting %></h1>
-    <p class="mt-1 text-sm text-ink-secondary"><%= @briefing.date.strftime("%A, %-d %B %Y") %> · about <%= [@briefing.stories.count * 2 + 2, 2].max %> minutes today.</p>
+  <% sections = {
+    "must-know" => { title: "Must Know", tagline: "what matters in tech, whatever your interests", hue: "s1", stories: @briefing.stories.where(section: :must_know) },
+    "for-you" => { title: "For You", tagline: "picked for you", hue: "s2", stories: @briefing.stories.where(section: :for_you) },
+    "one-new-thing" => { title: "One New Thing", tagline: "outside your usual path", hue: "s3", stories: @briefing.stories.where(section: :one_new_thing) }
+  } %>
+  <% previous = Briefing.before(@briefing.date) %>
+  <% is_today = @briefing.date == Date.current %>
+  <header class="mb-8 pt-8">
+    <h1 class="text-[2.25rem] sm:text-[2.5rem]"><%= greeting %></h1>
+    <p class="mt-3 text-[0.9375rem] text-ink-tertiary"><%= @briefing.date.strftime("%A, %-d %B %Y") %><% if previous %> — <span class="font-mono tabular-nums"><%= previous.date.strftime("%-d %b") %></span> is still there<%= link_to "read it", briefing_path(date: previous.date), class: "ml-1 underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %><% unless is_today %><span class="text-edge-strong"> | </span><%= link_to "back to today", root_path, class: "underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %></p>
   </header>
 
   <%= render "progress", briefing: @briefing %>
-  <div class="mb-8 flex flex-wrap gap-2">
-    <span class="rounded-full bg-bg-tertiary px-2.5 py-0.5 text-xs text-ink-secondary">Must Know · 3 min</span>
-    <span class="rounded-full bg-bg-tertiary px-2.5 py-0.5 text-xs text-ink-secondary">For You · 6 min</span>
-    <span class="rounded-full bg-bg-tertiary px-2.5 py-0.5 text-xs text-ink-secondary">One New Thing · 3 min</span>
-    <span class="rounded-full bg-bg-tertiary px-2.5 py-0.5 text-xs text-ink-secondary">Check-in · 2 min</span>
-  </div>
 
-  <%= render "section", id: "must-know", title: "Must Know", tagline: "what matters in tech, whatever your interests", dot: "bg-accent", bar: "border-l-accent", stories: @briefing.stories.where(section: :must_know) %>
-  <%= render "section", id: "for-you", title: "For You", tagline: "picked for you", dot: "bg-success", bar: "border-l-success", stories: @briefing.stories.where(section: :for_you) %>
-  <%= render "section", id: "one-new-thing", title: "One New Thing", tagline: "outside your usual path", dot: "bg-warning", bar: "border-l-warning", stories: @briefing.stories.where(section: :one_new_thing) %>
+  <nav class="mb-10 flex flex-wrap gap-2" aria-label="Sections">
+    <% sections.each do |id, s| %>
+      <% next if s[:stories].empty? %>
+      <a href="#<%= id %>" class="rounded-full px-3 py-1 text-[0.8125rem] font-medium hover:brightness-95" style="background: var(--color-<%= s[:hue] %>-soft); color: var(--color-<%= s[:hue] %>-ink);"><%= s[:title] %>, <%= [s[:stories].count * 2 + 1, 2].max %> min</a>
+    <% end %>
+  </nav>
+
+  <% sections.each do |id, s| %>
+    <% next if s[:stories].empty? %>
+    <%= render "section", id: id, title: s[:title], tagline: s[:tagline], hue: s[:hue], stories: s[:stories] %>
+  <% end %>
+
+  <footer class="mt-12 border-t border-ink-primary pt-3.5 text-[0.8125rem] text-ink-tertiary">
+    Briefly — read once a day, then close the tab.
+  </footer>
 <% else %>
-  <p class="mt-20 text-center text-ink-secondary">Nothing here yet. Tomorrow's briefing builds overnight.</p>
+  <% last = Briefing.before(Date.current) %>
+  <div class="mt-20 text-center">
+    <p class="text-ink-secondary">Nothing here yet. Tomorrow's briefing builds overnight.</p>
+    <% if last %>
+      <p class="mt-4"><%= link_to "Read #{last.date.strftime("%A")}'s briefing", briefing_path(date: last.date), class: "mark-btn no-underline" %></p>
+    <% end %>
+  </div>
 <% end %>
