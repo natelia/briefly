@@ -7,6 +7,10 @@ module BriefingsHelper
     day
   end
 
+  def source_host(story)
+    URI.parse(story.url).host.sub(/\Awww\./, "")
+  end
+
   def greeting(now = Time.current)
     return "Good morning, Natalia." if now.hour < 12
     return "Good afternoon, Natalia." if now.hour < 18

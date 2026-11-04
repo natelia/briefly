@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   patch "stories/:id/mark_unread", to: "stories#mark_unread", as: :mark_unread_story
   post "quiz_questions/:id/answer", to: "quiz_questions#answer", as: :answer_quiz_question
   resources :concept_cards, only: :show
+  resources :stories, only: :show
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
