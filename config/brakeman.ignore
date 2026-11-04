@@ -7,6 +7,10 @@
     {
       "fingerprint": "de71ad5f1108517dba28d83208f67f751cf4d77538b3b3b0fece6ba6959d022f",
       "note": "story.url is seeded content, not user input"
+    },
+    {
+      "fingerprint": "93c4d8e705366edb697918b9c0776aae57fee11aa880ac5f8b1605b21c99a258",
+      "note": "deeper_link is seeded content, not user input"
     }
   ]
 }
