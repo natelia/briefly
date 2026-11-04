@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_03_105854) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_04_142544) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,6 +19,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_03_105854) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["date"], name: "index_briefings_on_date", unique: true
+  end
+
+  create_table "quiz_questions", force: :cascade do |t|
+    t.bigint "briefing_id", null: false
+    t.text "question"
+    t.jsonb "options"
+    t.integer "answer_index"
+    t.text "explanation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["briefing_id"], name: "index_quiz_questions_on_briefing_id"
   end
 
   create_table "stories", force: :cascade do |t|
@@ -37,5 +48,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_03_105854) do
     t.index ["briefing_id"], name: "index_stories_on_briefing_id"
   end
 
+  add_foreign_key "quiz_questions", "briefings"
   add_foreign_key "stories", "briefings"
 end

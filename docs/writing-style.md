@@ -49,6 +49,7 @@ Personality comes from **word choice and rhythm**: plain verbs, short sentences,
 - One instruction per sentence.
 - No school language: no "fail", no "score", no "wrong answer".
 - A miss teaches. Wrong answers explain themselves; they never scold.
+- The question checks a concept or a term, never recall of the story's wording. Reading the story is the story's job; the quiz keeps the idea.
 
 ## Do / don't
 

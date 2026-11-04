@@ -18,11 +18,25 @@
       <% next if s[:stories].empty? %>
       <a href="#<%= id %>" class="rounded-full px-3 py-1 text-[0.8125rem] font-medium hover:brightness-95" style="background: var(--color-<%= s[:hue] %>-soft); color: var(--color-<%= s[:hue] %>-ink);"><%= s[:title] %>, <%= [s[:stories].count * 2 + 1, 2].max %> min</a>
     <% end %>
+    <% if @briefing.quiz_questions.any? %>
+      <a href="#check-in" class="rounded-full px-3 py-1 text-[0.8125rem] font-medium hover:brightness-95" style="background: var(--color-s4-soft); color: var(--color-s4-ink);">Check-in, 2 min</a>
+    <% end %>
   </nav>
 
   <% sections.each do |id, s| %>
     <% next if s[:stories].empty? %>
     <%= render "section", id: id, title: s[:title], tagline: s[:tagline], hue: s[:hue], stories: s[:stories] %>
+  <% end %>
+
+  <% if @briefing.quiz_questions.any? %>
+    <section id="check-in" class="mb-11 scroll-mt-6">
+      <div class="border-t border-ink-primary pt-3">
+        <h2 class="text-[1.3rem]">Check-in</h2>
+        <span class="mt-2 block h-1 w-9 rounded-full" style="background: var(--color-s4);"></span>
+      </div>
+      <p class="mb-4 mt-2 text-[0.8125rem] font-medium text-ink-tertiary">one question to keep yesterday's idea alive</p>
+      <%= render partial: "quiz_questions/quiz", collection: @briefing.quiz_questions, as: :quiz %>
+    </section>
   <% end %>
 
   <footer class="mt-12 border-t border-ink-primary pt-3.5 text-[0.8125rem] text-ink-tertiary">
