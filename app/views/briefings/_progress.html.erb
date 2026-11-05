@@ -1,6 +1,6 @@
 <div id="<%= dom_id(briefing, :progress) %>" class="mb-8">
   <div class="h-[7px] w-full overflow-hidden rounded-full bg-bg-tertiary">
-    <div class="rule-fill h-full rounded-full bg-accent" data-controller="progress" data-fill="<%= briefing.read_fraction.to_f %>"></div>
+    <div class="rule-fill h-full rounded-full bg-accent" data-controller="progress" data-fill="<%= briefing.read_fraction.to_f %>"<%= %( data-fill-from="#{from.to_f}") if local_assigns[:from] %>></div>
   </div>
   <% if briefing.read_fraction == Rational(1) && briefing.stories.any? %>
     <p class="mt-2 text-[0.8125rem] font-medium text-ink-secondary">All <%= briefing.stories.count %> read — you're caught up, that's the whole internet for today.</p>

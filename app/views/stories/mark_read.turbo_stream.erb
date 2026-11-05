@@ -1,2 +1,4 @@
 <%= turbo_stream.replace @story, partial: "briefings/story", locals: { story: @story } %>
-<%= turbo_stream.replace dom_id(@story.briefing, :progress), partial: "briefings/progress", locals: { briefing: @story.briefing } %>
+<% total = @story.briefing.stories.count %>
+<% from = Rational(@story.briefing.stories.read.count - 1, total) %>
+<%= turbo_stream.replace dom_id(@story.briefing, :progress), partial: "briefings/progress", locals: { briefing: @story.briefing, from: from } %>
