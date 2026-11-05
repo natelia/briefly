@@ -141,6 +141,20 @@
     background: color-mix(in oklab, var(--color-accent) 25%, transparent);
   }
 
+  .rule-fill {
+    transform-origin: left;
+    transform: scaleX(var(--fill));
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @starting-style {
+    .rule-fill { transform: scaleX(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rule-fill { transition: none; }
+  }
+
   .mark-btn {
     --bh: var(--color-accent);
     --bhi: var(--color-accent-deep);
