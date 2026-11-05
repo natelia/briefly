@@ -9,7 +9,7 @@
 
 @import "tailwindcss";
 
-@theme {
+@theme static {
   --color-bg-primary: oklch(98% 0.009 90);
   --color-bg-secondary: oklch(96% 0.011 90);
   --color-bg-tertiary: oklch(93% 0.013 88);
