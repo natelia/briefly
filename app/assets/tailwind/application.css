@@ -105,6 +105,9 @@
   html, body { overflow-x: clip; }
 
   html { color-scheme: light dark; }
+
+  :root[data-mode="dark"] { color-scheme: dark; }
+  :root[data-mode="light"] { color-scheme: light; }
   html { scroll-behavior: smooth; }
 
   @media (prefers-reduced-motion: reduce) {
