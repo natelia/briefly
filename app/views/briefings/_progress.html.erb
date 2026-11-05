@@ -1,6 +1,6 @@
 <div id="<%= dom_id(briefing, :progress) %>" class="mb-8">
   <div class="h-[7px] w-full overflow-hidden rounded-full bg-bg-tertiary">
-    <div class="h-full rounded-full bg-accent" style="width: <%= (briefing.read_fraction * 100).round %>%"></div>
+    <div class="rule-fill h-full rounded-full bg-accent" style="--fill: <%= briefing.read_fraction %>;"></div>
   </div>
   <% if briefing.read_fraction == Rational(1) && briefing.stories.any? %>
     <p class="mt-2 text-[0.8125rem] font-medium text-ink-secondary">All <%= briefing.stories.count %> read — you're caught up, that's the whole internet for today.</p>
