@@ -9,7 +9,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to root_path }
+      format.html { redirect_to story_path(@story), status: :see_other }
     end
   end
 
@@ -19,7 +19,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to root_path }
+      format.html { redirect_to story_path(@story), status: :see_other }
     end
   end
 end

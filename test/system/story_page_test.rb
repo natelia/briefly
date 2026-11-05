@@ -20,4 +20,17 @@ class StoryPageTest < ApplicationSystemTestCase
     assert_link "read the source", href: "https://blog.cloudflare.com/cloudflare-outage/"
     assert_link "back to the briefing"
   end
+
+  test "marking read from the story page updates the briefing" do
+    story = create(:story, briefing: create(:briefing, date: Date.current))
+
+    visit story_path(story)
+    click_button "Mark read"
+
+    assert_no_button "Mark read"
+    assert_text "read"
+
+    visit root_url
+    within("article", text: story.title) { assert_text "read" }
+  end
 end

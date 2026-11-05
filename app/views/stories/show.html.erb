@@ -16,6 +16,12 @@
   </p>
 <% end %>
 
-<p class="mt-9">
+<div class="mt-9 flex flex-wrap items-center gap-4">
   <%= link_to "read the source", @story.url, target: "_blank", rel: "noopener", class: "mark-btn no-underline" %>
-</p>
+  <% if @story.read? %>
+    <span class="inline-flex h-[38px] items-center rounded-full px-4 text-[0.875rem] font-semibold" style="background: var(--color-<%= section_hue(@story) %>-soft); color: var(--color-<%= section_hue(@story) %>-ink); box-shadow: inset 0 0 0 1.5px var(--color-<%= section_hue(@story) %>);">read</span>
+    <%= button_to "Mark unread", mark_unread_story_path(@story), method: :patch, data: { turbo: false }, class: "cursor-pointer border-0 bg-transparent p-0 text-[0.875rem] font-medium text-ink-tertiary underline decoration-edge decoration-1 underline-offset-4 hover:text-ink-secondary" %>
+  <% else %>
+    <%= button_to "Mark read", mark_read_story_path(@story), method: :patch, data: { turbo: false }, class: "mark-btn", style: "--bh: var(--color-#{section_hue(@story)}); --bhi: var(--color-#{section_hue(@story)}-ink);" %>
+  <% end %>
+</div>
