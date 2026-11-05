@@ -3,6 +3,12 @@
   <head>
     <title><%= content_for(:title) || "Briefly" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script>
+      (function () {
+        var m = localStorage.getItem("mode");
+        if (m === "dark" || m === "light") document.documentElement.dataset.mode = m;
+      })();
+    </script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,5 +23,8 @@
     <main class="mx-auto max-w-2xl px-5 py-10">
       <%= yield %>
     </main>
+    <button type="button" data-controller="mode" data-action="mode#toggle" class="fixed bottom-4 right-5 cursor-pointer border-0 bg-transparent p-2 font-mono text-xs text-ink-tertiary underline decoration-edge decoration-1 underline-offset-4 hover:text-ink-secondary" aria-label="Switch color mode">
+      <span data-mode-target="label">dark</span>
+    </button>
   </body>
 </html>
