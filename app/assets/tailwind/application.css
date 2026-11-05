@@ -142,13 +142,10 @@
   }
 
   .rule-fill {
+    --fill: 0;
     transform-origin: left;
     transform: scaleX(var(--fill));
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  @starting-style {
-    .rule-fill { transform: scaleX(0); }
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   @media (prefers-reduced-motion: reduce) {
