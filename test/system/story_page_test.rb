@@ -19,6 +19,7 @@ class StoryPageTest < ApplicationSystemTestCase
     assert_text "Why this matters for you:"
     assert_link "read the source", href: "https://blog.cloudflare.com/cloudflare-outage/"
     assert_link "back to the briefing"
+    assert_title "Cloudflare outage postmortem · Briefly"
   end
 
   test "marking read from the story page updates the briefing" do
