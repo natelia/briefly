@@ -1,4 +1,8 @@
 class StoriesController < ApplicationController
+  def show
+    @story = Story.find(params[:id])
+  end
+
   def mark_read
     @story = Story.find(params[:id])
     @story.mark_read!

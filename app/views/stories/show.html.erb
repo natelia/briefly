@@ -1,0 +1,21 @@
+<p class="font-mono text-xs text-ink-tertiary">
+  <%= link_to "back to the briefing", briefing_path(date: @story.briefing.date), class: "underline decoration-edge decoration-1 underline-offset-4 hover:text-accent" %>
+</p>
+
+<h1 class="mt-4 text-[2rem] leading-[1.12]"><%= @story.title %></h1>
+<p class="mt-2.5 font-mono text-xs text-ink-tertiary"><%= @story.source_name %> · <%= @story.section.to_s.tr("_", " ") %></p>
+
+<% paragraphs = (@story.digest.presence || @story.summary).split(/\n\n+/) %>
+<% paragraphs.each do |paragraph| %>
+  <p class="mt-5 text-[1.0625rem] leading-[1.7] text-ink-secondary"><%= paragraph %></p>
+<% end %>
+
+<% if @story.stretch? && @story.why_it_matters.present? %>
+  <p class="mt-7 rounded-xl border-l-4 bg-bg-secondary px-4.5 py-4 text-[1.0625rem] leading-[1.65] text-ink-secondary" style="border-left-color: var(--color-<%= section_hue(@story) %>);">
+    <strong class="font-semibold text-ink-primary">Why this matters for you:</strong> <%= @story.why_it_matters %>
+  </p>
+<% end %>
+
+<p class="mt-9">
+  <%= link_to "read the source", @story.url, target: "_blank", rel: "noopener", class: "mark-btn no-underline" %>
+</p>

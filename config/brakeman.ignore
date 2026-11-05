@@ -1,16 +1,20 @@
 {
   "ignored_warnings": [
     {
-      "fingerprint": "3e13d74954093c07b2dbdc1d6ea86956bc67bc6d4c926342f3d201c16d9d3945",
-      "note": "story.url is seeded content, not user input"
-    },
-    {
-      "fingerprint": "de71ad5f1108517dba28d83208f67f751cf4d77538b3b3b0fece6ba6959d022f",
-      "note": "story.url is seeded content, not user input"
-    },
-    {
       "fingerprint": "93c4d8e705366edb697918b9c0776aae57fee11aa880ac5f8b1605b21c99a258",
       "note": "deeper_link is seeded content, not user input"
+    },
+    {
+      "fingerprint": "0fd1aada2a6b55a79a97cfad9a3edf2de457a271a9e4d3fde8e7b1080f252ec3",
+      "note": "story.url is seeded content, not user input"
+    },
+    {
+      "fingerprint": "2475fcaeda142be1bbff00c037caabd19e6d56e9475b01ccf6bedc6f4cfb3c28",
+      "note": "story.url is seeded content, not user input"
+    },
+    {
+      "fingerprint": "4e9aa050ffbea6c6d2aab981a0e6dad02e39e1e7c10b0c49d28f3a926842905a",
+      "note": "story.url is seeded content, not user input"
     }
   ]
 }
