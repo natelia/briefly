@@ -2,6 +2,7 @@
 # Idempotent: find_or_create_by skips what already exists.
 {
   "Hacker News"     => "https://hnrss.org/frontpage",
+  "lobste.rs"       => "https://lobste.rs/rss",
   "dev.to"          => "https://dev.to/feed",
   "Ruby Weekly"     => "https://rubyweekly.com/rss",
   "InfoQ"           => "https://feed.infoq.com/",
