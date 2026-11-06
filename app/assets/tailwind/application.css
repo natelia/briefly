@@ -9,7 +9,7 @@
 
 @import "tailwindcss";
 
-@theme {
+@theme static {
   --color-bg-primary: oklch(98% 0.009 90);
   --color-bg-secondary: oklch(96% 0.011 90);
   --color-bg-tertiary: oklch(93% 0.013 88);
@@ -105,6 +105,9 @@
   html, body { overflow-x: clip; }
 
   html { color-scheme: light dark; }
+
+  :root[data-mode="dark"] { color-scheme: dark; }
+  :root[data-mode="light"] { color-scheme: light; }
   html { scroll-behavior: smooth; }
 
   @media (prefers-reduced-motion: reduce) {
@@ -136,6 +139,17 @@
 
   ::selection {
     background: color-mix(in oklab, var(--color-accent) 25%, transparent);
+  }
+
+  .rule-fill {
+    --fill: 0;
+    transform-origin: left;
+    transform: scaleX(var(--fill));
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rule-fill { transition: none; }
   }
 
   .mark-btn {
