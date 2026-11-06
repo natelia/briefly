@@ -1,3 +1,14 @@
+# M2 sources — the real feeds the nightly pipeline reads from.
+# Idempotent: find_or_create_by skips what already exists.
+{
+  "Hacker News"     => "https://hnrss.org/frontpage",
+  "dev.to"          => "https://dev.to/feed",
+  "Ruby Weekly"     => "https://rubyweekly.com/rss",
+  "InfoQ"           => "https://feed.infoq.com/",
+  "Cloudflare blog" => "https://blog.cloudflare.com/rss/",
+  "GitHub blog"     => "https://github.blog/feed/"
+}.each { |name, feed_url| Source.find_or_create_by!(feed_url:) { |s| s.name = name } }
+
 # Seeds build a complete demo day: today's full briefing, yesterday with one
 # unread story (the missed-day band), and the four-card "How LLMs work" series
 # across four consecutive briefings. Idempotent: skips entirely once today
