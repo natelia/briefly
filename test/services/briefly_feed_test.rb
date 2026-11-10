@@ -61,6 +61,31 @@ class Briefly::FeedTest < ActiveSupport::TestCase
     assert_equal 1, source.articles.count
   end
 
+  test ".import skips entries without a url instead of aborting the batch" do
+    source = create(:source)
+    xml = <<~XML
+      <?xml version="1.0" encoding="UTF-8"?>
+      <rss version="2.0">
+        <channel>
+          <title>Partial Feed</title>
+          <item>
+            <title>Entry with no link</title>
+            <description>Real feeds sometimes ship these.</description>
+            <pubDate>#{1.hour.ago.rfc822}</pubDate>
+          </item>
+          <item>
+            <title>Entry with a link</title>
+            <link>https://example.com/with-link</link>
+            <pubDate>#{1.hour.ago.rfc822}</pubDate>
+          </item>
+        </channel>
+      </rss>
+    XML
+
+    assert_equal 1, Briefly::Feed.import(source, xml, since: 24.hours.ago)
+    assert Article.find_by!(url: "https://example.com/with-link")
+  end
+
   test ".import understands Atom feeds" do
     source = create(:source)
 

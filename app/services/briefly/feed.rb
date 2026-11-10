@@ -26,7 +26,9 @@ module Briefly
     # NEW articles were stored.
     def self.import(source, xml, since: 24.hours.ago)
       parsed = Feedjira.parse(xml)
-      fresh = parsed.entries.select { |entry| entry.published && entry.published > since }
+      fresh = parsed.entries.select do |entry|
+        entry.published && entry.published > since && entry.url.present?
+      end
 
       fresh.count do |entry|
         article = Article.find_or_initialize_by(url: entry.url)
