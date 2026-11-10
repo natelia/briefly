@@ -1,5 +1,8 @@
 class Story < ApplicationRecord
   belongs_to :briefing
+  # Stories from the seed demo have no article — the link exists only for
+  # stories the pipeline creates (M2 step 2).
+  belongs_to :article, optional: true
 
   enum :section, { must_know: 0, for_you: 1, one_new_thing: 2 }
 
