@@ -67,7 +67,7 @@ class Briefly::SelectorTest < ActiveSupport::TestCase
     create(:story, briefing:)
     pile(7)
 
-    assert_equal [ ], Briefly::Selector.call(briefing, articles: Article.all)
+    assert_equal [], Briefly::Selector.call(briefing, articles: Article.all)
     assert_equal 1, briefing.stories.count
   end
 end

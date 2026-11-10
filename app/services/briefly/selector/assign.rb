@@ -33,7 +33,7 @@ module Briefly
       # model's answer fails validation: newest first — 3 must_know, 3
       # for_you (the last one stretches), 1 one_new_thing.
       def self.fallback(candidates)
-        slots = SLOTS.flat_map { |section, count| [section] * count }
+        slots = SLOTS.flat_map { |section, count| [ section ] * count }
         picks = candidates.first(slots.size).zip(slots).filter_map do |article, section|
           { article_id: article.id, section:, stretch: false } if article
         end
