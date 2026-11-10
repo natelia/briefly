@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_04_170234) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_06_095955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.bigint "source_id", null: false
+    t.string "title", null: false
+    t.string "url", null: false
+    t.text "summary"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_id"], name: "index_articles_on_source_id"
+    t.index ["url"], name: "index_articles_on_url", unique: true
+  end
 
   create_table "briefings", force: :cascade do |t|
     t.date "date", null: false
@@ -47,6 +59,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_170234) do
     t.index ["briefing_id"], name: "index_quiz_questions_on_briefing_id"
   end
 
+  create_table "sources", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "feed_url", null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_url"], name: "index_sources_on_feed_url", unique: true
+  end
+
   create_table "stories", force: :cascade do |t|
     t.bigint "briefing_id", null: false
     t.integer "section", null: false
@@ -64,6 +85,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_170234) do
     t.index ["briefing_id"], name: "index_stories_on_briefing_id"
   end
 
+  add_foreign_key "articles", "sources"
   add_foreign_key "concept_cards", "briefings"
   add_foreign_key "quiz_questions", "briefings"
   add_foreign_key "stories", "briefings"
