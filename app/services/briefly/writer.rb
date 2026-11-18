@@ -4,6 +4,7 @@ module Briefly
   # keeps the placeholder summaries — the briefing always exists.
   class Writer
     SUMMARY_LIMIT = 200
+    HEADLINE_LIMIT = 120
     DIGEST_LIMIT = 2000
     FEED_CONTEXT = 2000
 
@@ -39,6 +40,13 @@ module Briefly
           each) that retell the article in more detail: what it is, how it
           works, what follows. Only facts present in the input.
 
+        Also rewrite every title as a headline: plain, concrete, max 10
+        words. Name the subject and what happened, so a reader who never
+        heard of the topic understands the line. No clickbait, no puns,
+        no teasers. Keep essential product or protocol names (nginx,
+        Postgres), spell out or drop acronyms (RCE -> "remote code
+        execution").
+
         A stretch story is outside the reader's field. Start its summary with
         "A stretch pick:" and also give why_it_matters: one sentence that
         connects the story to this reader's world.
@@ -48,7 +56,7 @@ module Briefly
         title and the source alone.
 
         Answer with strict JSON, nothing else. One object per input story:
-        [{"id": 1, "summary": "...", "digest": "para1\n\npara2\n\npara3"}]
+        [{"id": 1, "headline": "...", "summary": "...", "digest": "para1\n\npara2\n\npara3"}]
         why_it_matters only for stretch stories. Separate digest paragraphs
         with a blank line. Summaries and digests in English.
 
@@ -80,6 +88,8 @@ module Briefly
         next unless story && summary.present? && summary.length <= SUMMARY_LIMIT
 
         fields = { summary: }
+        headline = entry["headline"].to_s.strip
+        fields[:headline] = headline if headline.present? && headline.length <= HEADLINE_LIMIT
         digest = entry["digest"].to_s.strip
         fields[:digest] = digest if digest.present? && digest.length <= DIGEST_LIMIT
         why = entry["why_it_matters"].to_s.strip

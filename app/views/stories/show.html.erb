@@ -1,11 +1,14 @@
-<% content_for :title, "#{@story.title} · briefly" %>
+<% content_for :title, "#{@story.display_title} · briefly" %>
 
 <p class="font-mono text-xs text-ink-tertiary">
   <%= link_to "back to the briefing", briefing_path(date: @story.briefing.date), class: "underline decoration-edge decoration-1 underline-offset-4 hover:text-accent" %>
 </p>
 
-<h1 class="mt-4 text-[2rem] leading-[1.12]"><%= @story.title %></h1>
+<h1 class="mt-4 text-[2rem] leading-[1.12]"><%= @story.display_title %></h1>
 <p class="mt-2.5 font-mono text-xs text-ink-tertiary"><%= @story.source_name %> · <%= @story.section.to_s.tr("_", " ") %></p>
+<% if @story.headline.present? %>
+  <p class="mt-1.5 font-mono text-xs text-ink-tertiary">original: <%= @story.title %></p>
+<% end %>
 
 <% paragraphs = (@story.digest.presence || @story.summary).split(/\n\n+/) %>
 <% paragraphs.each do |paragraph| %>
