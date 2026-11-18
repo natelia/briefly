@@ -8,7 +8,7 @@ module Llm
     class Error < StandardError; end
 
     URL = URI("https://open.bigmodel.cn/api/paas/v4/chat/completions")
-    MODEL = "glm-5.3-flash"
+    MODEL = "glm-4-flash-250414"
     TIMEOUT = 30
 
     # Returns the assistant message text.
