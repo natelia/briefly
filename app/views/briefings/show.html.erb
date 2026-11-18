@@ -27,18 +27,17 @@
   </nav>
 
   <%# xl: the briefing spreads into a newspaper — sections side by side,
-      the extras column carries one new thing, concept and check-in. Each
-      column scrolls on its own; the masthead stays pinned above. %>
-  <div class="xl:grid xl:h-[calc(100vh-19rem)] xl:grid-cols-3 xl:gap-x-10">
-    <div class="xl:overflow-y-auto xl:[scrollbar-width:thin] xl:pr-2">
+      the extras column carries one new thing, concept and check-in. %>
+  <div class="xl:grid xl:grid-cols-3 xl:gap-x-10">
+    <div>
       <%= render "section", id: "must-know", **sections["must-know"] if sections["must-know"][:stories].any? %>
     </div>
 
-    <div class="xl:overflow-y-auto xl:[scrollbar-width:thin] xl:pr-2">
+    <div>
       <%= render "section", id: "for-you", **sections["for-you"] if sections["for-you"][:stories].any? %>
     </div>
 
-    <div class="xl:col-start-3 xl:overflow-y-auto xl:[scrollbar-width:thin] xl:pr-2">
+    <div class="xl:col-start-3">
       <%= render "section", id: "one-new-thing", **sections["one-new-thing"] if sections["one-new-thing"][:stories].any? %>
 
       <% if @briefing.concept_cards.any? %>
@@ -62,14 +61,10 @@
           <%= render partial: "quiz_questions/quiz", collection: @briefing.quiz_questions, as: :quiz %>
         </section>
       <% end %>
-
-      <footer class="mt-12 hidden border-t border-ink-primary pt-3.5 text-[0.8125rem] text-ink-tertiary xl:block">
-        briefly — read once a day, then close the tab.
-      </footer>
     </div>
   </div>
 
-  <footer class="mt-12 border-t border-ink-primary pt-3.5 text-[0.8125rem] text-ink-tertiary xl:hidden">
+  <footer class="mt-12 border-t border-ink-primary pt-3.5 text-[0.8125rem] text-ink-tertiary">
     briefly — read once a day, then close the tab.
   </footer>
 <% else %>
