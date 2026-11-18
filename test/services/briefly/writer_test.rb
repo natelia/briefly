@@ -6,7 +6,8 @@ class Briefly::WriterTest < ActiveSupport::TestCase
     stretch = create(:story, briefing:, section: :for_you, stretch: true)
     plain = create(:story, briefing:, summary: "Old summary.")
     answer = JSON.generate([
-      { id: plain.id, summary: "New summary for the plain story." },
+      { id: plain.id, summary: "New summary for the plain story.",
+        digest: "First paragraph with detail.\n\nSecond paragraph." },
       { id: stretch.id, summary: "A stretch pick: something new.",
         why_it_matters: "It changes how you design components." }
     ])
@@ -15,8 +16,23 @@ class Briefly::WriterTest < ActiveSupport::TestCase
 
     assert_equal 2, count
     assert_equal "New summary for the plain story.", plain.reload.summary
+    assert_equal "First paragraph with detail.\n\nSecond paragraph.", plain.reload.digest
+    assert_nil stretch.reload.digest
     assert_equal "A stretch pick: something new.", stretch.reload.summary
     assert_equal "It changes how you design components.", stretch.reload.why_it_matters
+  end
+
+  test "skips an oversized digest but keeps the summary" do
+    briefing = create(:briefing)
+    story = create(:story, briefing:, summary: "Old summary.")
+    answer = JSON.generate([
+      { id: story.id, summary: "Short teaser.", digest: "x" * 2001 }
+    ])
+
+    Briefly::Writer.call(briefing, complete: ->(_p) { answer })
+
+    assert_equal "Short teaser.", story.reload.summary
+    assert_nil story.reload.digest
   end
 
   test "skips answers with unknown ids or empty summaries" do
@@ -57,5 +73,6 @@ class Briefly::WriterTest < ActiveSupport::TestCase
     assert_includes asked, "one_new_thing"
     assert_includes asked, story.id.to_s
     assert_includes asked, "A stretch pick"
+    assert_includes asked, "digest"
   end
 end
