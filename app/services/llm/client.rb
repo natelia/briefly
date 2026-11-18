@@ -9,7 +9,7 @@ module Llm
 
     URL = URI("https://open.bigmodel.cn/api/paas/v4/chat/completions")
     MODEL = "glm-5.3-flash"
-    TIMEOUT = 30
+    TIMEOUT = 120
 
     # Returns the assistant message text.
     def self.complete(prompt, model: MODEL, post: ->(body) { post!(body) })
