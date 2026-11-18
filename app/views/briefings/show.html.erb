@@ -1,5 +1,4 @@
 <% if @briefing %>
-  <% content_for :main_class, "xl:max-w-6xl" %>
   <% sections = {
     "must-know" => { title: "Must Know", tagline: "what matters in tech, whatever your interests", hue: "s1", stories: @briefing.stories.where(section: :must_know) },
     "for-you" => { title: "For You", tagline: "picked for you", hue: "s2", stories: @briefing.stories.where(section: :for_you) },
@@ -10,7 +9,7 @@
   <% is_today = @briefing.date == Date.current %>
   <%= render "missed_day", briefing: missed if missed %>
   <header class="mb-8 pt-8">
-    <h1 class="text-[2.25rem] sm:text-[2.5rem] xl:text-[2.75rem]"><%= greeting %></h1>
+    <h1 class="text-[2.25rem] sm:text-[2.5rem]"><%= greeting %></h1>
     <p class="mt-3 text-[0.9375rem] text-ink-tertiary"><%= @briefing.date.strftime("%A, %-d %B %Y") %><% if previous && missed.nil? %> — <span class="font-mono tabular-nums"><%= previous.date.strftime("%-d %b") %></span> is still there<%= link_to "read it", briefing_path(date: previous.date), class: "ml-1 underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %><% unless is_today %><span class="text-edge-strong"> | </span><%= link_to "back to today", root_path, class: "underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %></p>
   </header>
 
@@ -26,43 +25,32 @@
     <% end %>
   </nav>
 
-  <%# xl: the briefing spreads into a newspaper — sections side by side,
-      the extras column carries one new thing, concept and check-in. %>
-  <div class="xl:grid xl:grid-cols-3 xl:gap-x-10">
-    <div>
-      <%= render "section", id: "must-know", **sections["must-know"] if sections["must-know"][:stories].any? %>
-    </div>
+  <% sections.each do |id, s| %>
+    <% next if s[:stories].empty? %>
+    <%= render "section", id: id, title: s[:title], tagline: s[:tagline], hue: s[:hue], stories: s[:stories] %>
+  <% end %>
 
-    <div>
-      <%= render "section", id: "for-you", **sections["for-you"] if sections["for-you"][:stories].any? %>
-    </div>
+  <% if @briefing.concept_cards.any? %>
+    <section id="concept" class="mb-11 scroll-mt-6">
+      <div class="border-t border-ink-primary pt-3">
+        <h2 class="text-[1.3rem]">Concept of the day</h2>
+        <span class="mt-2 block h-1 w-9 rounded-full bg-accent"></span>
+      </div>
+      <p class="mb-4 mt-2 text-[0.8125rem] font-medium text-ink-tertiary">one idea, explained in three blocks</p>
+      <%= render partial: "briefings/concept_card", collection: @briefing.concept_cards, as: :card %>
+    </section>
+  <% end %>
 
-    <div class="xl:col-start-3">
-      <%= render "section", id: "one-new-thing", **sections["one-new-thing"] if sections["one-new-thing"][:stories].any? %>
-
-      <% if @briefing.concept_cards.any? %>
-        <section id="concept" class="mb-11 scroll-mt-6">
-          <div class="border-t border-ink-primary pt-3">
-            <h2 class="text-[1.3rem]">Concept of the day</h2>
-            <span class="mt-2 block h-1 w-9 rounded-full bg-accent"></span>
-          </div>
-          <p class="mb-4 mt-2 text-[0.8125rem] font-medium text-ink-tertiary">one idea, explained in three blocks</p>
-          <%= render partial: "briefings/concept_card", collection: @briefing.concept_cards, as: :card %>
-        </section>
-      <% end %>
-
-      <% if @briefing.quiz_questions.any? %>
-        <section id="check-in" class="mb-11 scroll-mt-6">
-          <div class="border-t border-ink-primary pt-3">
-            <h2 class="text-[1.3rem]">Check-in</h2>
-            <span class="mt-2 block h-1 w-9 rounded-full" style="background: var(--color-s4);"></span>
-          </div>
-          <p class="mb-4 mt-2 text-[0.8125rem] font-medium text-ink-tertiary">one question to keep yesterday's idea alive</p>
-          <%= render partial: "quiz_questions/quiz", collection: @briefing.quiz_questions, as: :quiz %>
-        </section>
-      <% end %>
-    </div>
-  </div>
+  <% if @briefing.quiz_questions.any? %>
+    <section id="check-in" class="mb-11 scroll-mt-6">
+      <div class="border-t border-ink-primary pt-3">
+        <h2 class="text-[1.3rem]">Check-in</h2>
+        <span class="mt-2 block h-1 w-9 rounded-full" style="background: var(--color-s4);"></span>
+      </div>
+      <p class="mb-4 mt-2 text-[0.8125rem] font-medium text-ink-tertiary">one question to keep yesterday's idea alive</p>
+      <%= render partial: "quiz_questions/quiz", collection: @briefing.quiz_questions, as: :quiz %>
+    </section>
+  <% end %>
 
   <footer class="mt-12 border-t border-ink-primary pt-3.5 text-[0.8125rem] text-ink-tertiary">
     briefly — read once a day, then close the tab.
