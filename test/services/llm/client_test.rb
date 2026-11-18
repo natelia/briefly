@@ -8,7 +8,7 @@ class Llm::ClientTest < ActiveSupport::TestCase
     assert_equal "Hello.", Llm::Client.complete("Say hi", post:)
 
     payload = JSON.parse(body)
-    assert_equal "glm-4-flash-250414", payload["model"]
+    assert_equal "glm-5.3-flash", payload["model"]
     assert_equal "Say hi", payload.dig("messages", 0, "content")
   end
 
