@@ -26,6 +26,16 @@ class Briefly::Selector::CandidatesTest < ActiveSupport::TestCase
     assert_equal 1, result.count { _1.source == quiet }
   end
 
+  test "drops articles whose summary is only markup or a bare link" do
+    source = create(:source)
+    real = create(:article, source:, title: "Real story", summary: "A" * 120, published_at: 1.hour.ago)
+    create(:article, source:, title: "Link only", summary: '<p><a href="https://lobste.rs/s/x">markdownWeb</a></p>', published_at: 30.minutes.ago)
+
+    result = Briefly::Selector::Candidates.call(Article.all)
+
+    assert_equal [ real ], result
+  end
+
   test "drops articles without a published_at instead of crashing" do
     source = create(:source)
     dated = create(:article, source:, published_at: 1.hour.ago)
