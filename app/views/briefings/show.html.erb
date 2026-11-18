@@ -8,10 +8,12 @@
   <% previous = Briefing.before(@briefing.date) %>
   <% missed = missed_day_briefing(@briefing) %>
   <% is_today = @briefing.date == Date.current %>
-  <%= render "missed_day", briefing: missed if missed %>
+  <div class="xl:hidden">
+    <%= render "missed_day", briefing: missed if missed %>
+  </div>
   <header class="mb-8 pt-8">
     <h1 class="text-[2.25rem] sm:text-[2.5rem] xl:text-[2.75rem]"><%= greeting %></h1>
-    <p class="mt-3 text-[0.9375rem] text-ink-tertiary"><%= @briefing.date.strftime("%A, %-d %B %Y") %><% if previous && missed.nil? %> — <span class="font-mono tabular-nums"><%= previous.date.strftime("%-d %b") %></span> is still there<%= link_to "read it", briefing_path(date: previous.date), class: "ml-1 underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %><% unless is_today %><span class="text-edge-strong"> | </span><%= link_to "back to today", root_path, class: "underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %></p>
+    <p class="mt-3 text-[0.9375rem] text-ink-tertiary"><%= @briefing.date.strftime("%A, %-d %B %Y") %><% if previous && missed.nil? %><span class="xl:hidden"> — <span class="font-mono tabular-nums"><%= previous.date.strftime("%-d %b") %></span> is still there<%= link_to "read it", briefing_path(date: previous.date), class: "ml-1 underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %></span><% end %><% unless is_today %><span class="text-edge-strong"> | </span><%= link_to "back to today", root_path, class: "underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %><% end %></p>
   </header>
 
   <%= render "progress", briefing: @briefing %>
@@ -26,19 +28,31 @@
     <% end %>
   </nav>
 
-  <%# xl: the briefing spreads into a newspaper — sections side by side,
-      the extras column carries one new thing, concept and check-in. %>
+  <%# xl: stage and wing. The left two-thirds carry the reading sections
+      and scroll with the page; the right third is pinned (sticky) and
+      never moves. The notice slot inside the wing always occupies the
+      same height, so switching days changes no layout below it. %>
   <div class="xl:grid xl:grid-cols-3 xl:gap-x-10">
-    <div>
-      <%= render "section", id: "must-know", **sections["must-know"] if sections["must-know"][:stories].any? %>
+    <div class="xl:col-span-2 xl:grid xl:grid-cols-2 xl:gap-x-8">
+      <div>
+        <%= render "section", id: "must-know", **sections["must-know"] if sections["must-know"][:stories].any? %>
+      </div>
+
+      <div>
+        <%= render "section", id: "for-you", **sections["for-you"] if sections["for-you"][:stories].any? %>
+      </div>
     </div>
 
-    <div>
-      <%= render "section", id: "for-you", **sections["for-you"] if sections["for-you"][:stories].any? %>
-    </div>
-
-    <div class="xl:col-start-3">
+    <div class="xl:sticky xl:top-6 xl:self-start">
       <%= render "section", id: "one-new-thing", **sections["one-new-thing"] if sections["one-new-thing"][:stories].any? %>
+
+      <div class="hidden xl:mb-11 xl:block xl:min-h-[4.5rem] text-[0.9375rem] text-ink-tertiary">
+        <% if missed %>
+          You skipped <%= missed.date.strftime("%A") %>. Nothing stacked — one thing mattered: <%= link_to missed.stories.unread.first.display_title, briefing_path(date: missed.date), class: "underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %>.
+        <% elsif previous %>
+          <span class="font-mono tabular-nums"><%= previous.date.strftime("%-d %b") %></span> is still there — <%= link_to "read it", briefing_path(date: previous.date), class: "underline decoration-edge-strong decoration-1 underline-offset-4 hover:text-accent" %>.
+        <% end %>
+      </div>
 
       <% if @briefing.concept_cards.any? %>
         <section id="concept" class="mb-11 scroll-mt-6">
