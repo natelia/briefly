@@ -4,15 +4,25 @@ module Briefly
     class Candidates
       LIMIT = 30
       PER_SOURCE_CAP = 8
+      MIN_SUMMARY = 80
 
       def self.call(articles, limit: LIMIT, per_source_cap: PER_SOURCE_CAP)
         newest_first = articles
                          .select(&:published_at)
                          .sort_by { |article| -article.published_at.to_i }
+                         .then { |dated| with_substance(dated) }
 
         cap_per_source(newest_first, per_source_cap)
           .then { |capped| dedupe_titles(capped) }
           .first(limit)
+      end
+
+      # An article whose summary is only markup or a bare link has nothing
+      # for the selector or the writer to work with — drop it before ranking.
+      def self.with_substance(articles)
+        articles.select do |article|
+          article.summary.to_s.gsub(/<[^>]+>/, " ").gsub(/\s+/, " ").strip.length >= MIN_SUMMARY
+        end
       end
 
       def self.cap_per_source(articles, cap)

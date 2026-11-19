@@ -1,0 +1,46 @@
+require "net/http"
+
+module Llm
+  # Thin chat-completions client for the GLM API (OpenAI-compatible
+  # endpoint). Same conventions as Briefly::Feed: plain Net::HTTP, an
+  # injected post callable for tests, failures raised as Error.
+  class Client
+    class Error < StandardError; end
+
+    URL = URI("https://open.bigmodel.cn/api/paas/v4/chat/completions")
+    MODEL = "glm-5.3-flash"
+    TIMEOUT = 120
+
+    # Returns the assistant message text.
+    def self.complete(prompt, model: MODEL, post: ->(body) { post!(body) })
+      body = { model:, messages: [ { role: "user", content: prompt } ],
+               temperature: 0.3 }.to_json
+      raw = post.call(body)
+      content = JSON.parse(raw).dig("choices", 0, "message", "content")
+      raise Error, "no content in the LLM response" if content.blank?
+
+      content
+    rescue JSON::ParserError => e
+      raise Error, "bad JSON from the LLM: #{e.message}"
+    end
+
+    def self.post!(body)
+      http = Net::HTTP.new(URL.host, URL.port)
+      http.use_ssl = true
+      http.open_timeout = 5
+      http.read_timeout = TIMEOUT
+
+      request = Net::HTTP::Post.new(URL, "Content-Type" => "application/json",
+                                              "Authorization" => "Bearer #{api_key}")
+      response = http.request(request, body)
+      raise Error, "HTTP #{response.code} from the LLM" unless response.is_a?(Net::HTTPSuccess)
+
+      response.body
+    end
+
+    def self.api_key
+      Setting.llm_api_key.presence || ENV["LLM_API_KEY"] ||
+        raise(Error, "set the LLM API key in the app (Settings) or via LLM_API_KEY on the server")
+    end
+  end
+end

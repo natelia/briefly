@@ -8,6 +8,11 @@ class Story < ApplicationRecord
 
   validates :title, :summary, presence: true
 
+  # The writer's plain-language headline, or the raw feed title until it runs.
+  def display_title
+    headline.presence || title
+  end
+
   scope :unread, -> { where(read_at: nil) }
   scope :read, -> { where.not(read_at: nil) }
 

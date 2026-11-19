@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_10_152839) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_19_084012) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -59,6 +59,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_10_152839) do
     t.index ["briefing_id"], name: "index_quiz_questions_on_briefing_id"
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.string "llm_api_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sources", force: :cascade do |t|
     t.string "name", null: false
     t.string "feed_url", null: false
@@ -83,6 +89,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_10_152839) do
     t.datetime "updated_at", null: false
     t.text "digest"
     t.bigint "article_id"
+    t.string "headline"
     t.index ["article_id"], name: "index_stories_on_article_id"
     t.index ["briefing_id"], name: "index_stories_on_briefing_id"
   end

@@ -1,10 +1,10 @@
 <% hue = section_hue(story) %>
 <article class="mb-4 rounded-2xl border border-transparent px-5 py-4 <%= "read-card" if story.read? %>" id="<%= dom_id(story) %>" style="background: var(--color-<%= hue %>-soft);">
   <h3 class="text-[1.0625rem]">
-    <%= link_to story.title, story_path(story), class: "font-semibold underline decoration-1 underline-offset-4", style: "text-decoration-color: var(--color-#{hue});" %>
+    <%= link_to story.display_title, story_path(story), class: "font-semibold underline decoration-1 underline-offset-4", style: "text-decoration-color: var(--color-#{hue});" %>
   </h3>
   <p class="mb-2.5 mt-1.5 font-mono text-xs text-ink-tertiary"><%= story.source_name %></p>
-  <p class="text-[1.0625rem] leading-[1.6] <%= story.read? ? "text-ink-tertiary" : "text-ink-secondary" %>"><%= story.summary %></p>
+  <p class="text-[1.0625rem] leading-[1.6] <%= story.read? ? "text-ink-tertiary" : "text-ink-secondary" %>"><%= truncate(story.summary, length: 180) %></p>
   <% if story.stretch? %>
     <p class="mt-4 rounded-xl border-l-4 bg-bg-primary/70 px-4 py-3.5 text-[0.9375rem] leading-[1.6] text-ink-secondary" style="border-left-color: var(--color-<%= hue %>);">
       <strong class="font-semibold text-ink-primary">Why this matters for you:</strong> <%= story.why_it_matters %>
