@@ -39,8 +39,8 @@ module Llm
     end
 
     def self.api_key
-      ENV["LLM_API_KEY"] || Rails.application.credentials.dig(:llm, :api_key) ||
-        raise(Error, "set LLM_API_KEY or credentials llm.api_key")
+      Setting.llm_api_key.presence || ENV["LLM_API_KEY"] ||
+        raise(Error, "set the LLM API key in the app (Settings) or via LLM_API_KEY on the server")
     end
   end
 end

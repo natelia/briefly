@@ -1,0 +1,44 @@
+<% content_for :title, "Settings · briefly" %>
+
+<p class="font-mono text-xs text-ink-tertiary">
+  <%= link_to "back to the briefing", root_path, class: "underline decoration-edge decoration-1 underline-offset-4 hover:text-accent" %>
+</p>
+
+<h1 class="mt-4 text-[2rem] leading-[1.12]">Settings</h1>
+<p class="mt-2.5 font-mono text-xs text-ink-tertiary">briefly · one key, one phone call a day</p>
+
+<section class="mt-8">
+  <div class="border-t border-ink-primary pt-3">
+    <h2 class="text-[1.3rem]">LLM API key</h2>
+    <span class="mt-2 block h-1 w-9 rounded-full bg-accent"></span>
+  </div>
+
+  <p class="mt-3 text-[0.9375rem] leading-[1.6] text-ink-secondary">
+    The writer calls the LLM once per briefing to write headlines, teasers
+    and digests. Without a key everything still works — stories just keep
+    their placeholder texts.
+  </p>
+
+  <% if Setting.llm_api_key.present? %>
+    <p class="mt-4 font-mono text-xs text-ink-tertiary">
+      key saved, ends with <span class="font-semibold text-ink-secondary">••••<%= Setting.llm_api_key.last(4) %></span>
+    </p>
+
+    <%= button_to "remove key", settings_path, method: :delete, data: { turbo: false },
+          class: "mt-4 cursor-pointer border-0 bg-transparent p-0 text-[0.875rem] font-medium text-ink-tertiary underline decoration-edge decoration-1 underline-offset-4 hover:text-ink-secondary" %>
+  <% elsif ENV["LLM_API_KEY"].present? %>
+    <p class="mt-4 font-mono text-xs text-ink-tertiary">
+      using the server key (<span class="font-semibold text-ink-secondary">LLM_API_KEY</span>) — ends with ••••<%= ENV["LLM_API_KEY"].last(4) %>
+    </p>
+    <p class="mt-1 text-[0.8125rem] text-ink-tertiary">saving a key here will take precedence over the server one</p>
+  <% else %>
+    <p class="mt-4 font-mono text-xs text-ink-tertiary">no key set</p>
+  <% end %>
+
+  <%= form_with url: settings_path, method: :patch, local: true, class: "mt-6" do %>
+    <label for="api_key" class="block font-mono text-xs text-ink-tertiary">GLM API key (open.bigmodel.cn → API Keys)</label>
+    <%= password_field_tag :api_key, nil, id: "api_key", autocomplete: "off",
+          placeholder: "paste the key", class: "mt-2 w-full max-w-md rounded-xl border border-edge bg-bg-secondary px-4 py-2.5 font-mono text-sm text-ink-primary placeholder:text-ink-tertiary focus:outline-none" %>
+    <%= submit_tag "save key", class: "mark-btn no-underline mt-4" %>
+  <% end %>
+</section>

@@ -24,4 +24,36 @@ class Llm::ClientTest < ActiveSupport::TestCase
     error = assert_raises(Llm::Client::Error) { Llm::Client.complete("Hi", post:) }
     assert_match "bad JSON", error.message
   end
+
+  test "api_key prefers the in-app key over the server env" do
+    old = ENV.delete("LLM_API_KEY")
+    Setting.llm_api_key = "sk-in-app"
+    ENV["LLM_API_KEY"] = "sk-server"
+
+    assert_equal "sk-in-app", Llm::Client.api_key
+  ensure
+    Setting.llm_api_key = nil
+    ENV["LLM_API_KEY"] = old
+  end
+
+  test "api_key falls back to the server env without an in-app key" do
+    old = ENV.delete("LLM_API_KEY")
+    Setting.llm_api_key = nil
+    ENV["LLM_API_KEY"] = "sk-server"
+
+    assert_equal "sk-server", Llm::Client.api_key
+  ensure
+    Setting.llm_api_key = nil
+    ENV["LLM_API_KEY"] = old
+  end
+
+  test "api_key raises a plain instruction when nothing is set" do
+    old = ENV.delete("LLM_API_KEY")
+    Setting.llm_api_key = nil
+
+    error = assert_raises(Llm::Client::Error) { Llm::Client.api_key }
+    assert_match "Settings", error.message
+  ensure
+    ENV["LLM_API_KEY"] = old
+  end
 end

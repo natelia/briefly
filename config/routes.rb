@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post "quiz_questions/:id/answer", to: "quiz_questions#answer", as: :answer_quiz_question
   resources :concept_cards, only: :show
   resources :stories, only: :show
+  resource :settings, only: [ :show, :update, :destroy ]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
